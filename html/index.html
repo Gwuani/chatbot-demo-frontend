@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Stijn</title>
+    <title>Conversational Interface</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    
+
+    <div class="chat-container">
+        <div class="chat-history">
+            <div class="message user-prompt">
+                <div class="message-content">
+                    <p>Kan je mij een voorbeeld geven van hoe een goeie chatbot html pagina eruit ziet?</p>
+                </div>
+            </div>
+
+            <div class="message ai-response">
+                <div class="message-content">
+                    <p>Zeker! Een goede chatbotpagina is meer dan alleen een gespreksvenster...</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <textarea placeholder="Typ hier je vraag..."></textarea>
+        <button>Verstuur</button>
+    </div>
+
 </body>
 </html>
