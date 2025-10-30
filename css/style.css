@@ -21,27 +21,86 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* NIEUW: Linker kolom: History */
+
+/* ======================================= */
+/* Linker kolom: History Sidebar (COMPLEET)*/
+/* ======================================= */
+
+/* --- 1. De Sidebar (Uitgeklapt) --- */
 .history-sidebar {
-    flex: 1; /* Neemt 1 deel van de ruimte, net als de rechter sidebar */
-    background-color: #fcfbff; /* Dezelfde lichte kleur als de chat-area */
+    flex: 1; /* Neemt 1 deel van de ruimte */
+    min-width: 250px; /* Startbreedte */
+    background-color: #fcfbff;
     padding: 30px;
-    border-right: 1px solid #e0e0e0; /* Subtiele scheidingslijn */
-    overflow-y: auto; /* Scrollen als de lijst lang wordt */
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto; /* Scrollen voor de lijst */
+    overflow-x: hidden; /* Geen horizontale scroll */
     color: #333;
+    white-space: nowrap; /* Voorkomt dat tekst lelijk afbreekt tijdens animatie */
+    
+    /* VLOEIENDE TRANSITIE: */
+    transition: min-width 0.4s ease-in-out, 
+                flex 0.4s ease-in-out, 
+                padding 0.4s ease-in-out;
 }
 
-.history-sidebar h4 {
-    margin-top: 0;
+/* --- 2. De Header (met Titel en Knop) --- */
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+    /* Zorgt dat de header zelf ook soepel meebeweegt */
+    transition: margin 0.4s ease-in-out;
+}
+
+.history-header h4 {
+    margin: 0;
     font-weight: 600;
     color: #555;
+    
+    /* ANIMATIE: Zorgt dat de titel krimpt en fadet */
+    max-width: 200px; /* Start-breedte voor de tekst */
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 1;
+    transition: opacity 0.2s ease-out, 
+                max-width 0.4s ease-in-out, 
+                margin 0.4s ease-in-out;
 }
 
+/* --- 3. De Inklap-knop --- */
+.history-toggle-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+
+    /* FIX: Vaste afmeting zodat hij niet krimpt */
+    width: 40px;
+    height: 40px;
+    padding: 0; 
+    flex-shrink: 0; /* Extra garantie: de knop mag NOOIT krimpen */
+}
+
+.history-toggle-btn svg {
+    stroke: #555;
+    /* ANIMATIE: Roteer de knop */
+    transition: transform 0.4s ease-in-out;
+}
+
+/* --- 4. De Geschiedenis Lijst --- */
 .chat-history-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    opacity: 1;
+    /* ANIMATIE: Laat de lijst faden */
+    transition: opacity 0.2s 0.1s ease-out, visibility 0.2s 0.1s;
 }
 
 .chat-history-list li {
@@ -63,28 +122,47 @@ body {
     background-color: #e0e0e5;
 }
 
-/* --- DE INGEKLAPTE STAAT --- */
+
+/* ======================================= */
+/* --- DE INGEKLAPTE STAAT (ALLES-IN-1) --- */
+/* ======================================= */
+
 .history-sidebar.collapsed {
-    flex: 0 1 80px; /* Krimp naar een vaste breedte van 80px */
+    flex: 0 1 80px; /* Krimp naar 80px */
     min-width: 80px;
-    align-items: center; /* Centreer de knop */
+    overflow: hidden; /* Verberg alle scrollbars */
+    white-space: normal; 
+    
+    /* FIX: Reset padding, behoud alleen padding-top */
+    padding: 30px 0 0 0; 
+    /* De display:flex en justify-content zijn hier verwijderd */
 }
 
-/* Verberg de titel en lijst als de sidebar ingeklapt is */
-.history-sidebar.collapsed .history-header h4,
-.history-sidebar.collapsed .chat-history-list {
-    visibility: hidden;
+/* Verberg de titel */
+.history-sidebar.collapsed .history-header h4 {
     opacity: 0;
+    max-width: 0;
+    margin: 0;
 }
 
-/* Centreer de knop als de sidebar ingeklapt is */
+/* Verberg de lijst */
+.history-sidebar.collapsed .chat-history-list {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.1s ease-out, visibility 0.1s; /* Sneller verbergen */
+}
+
+/* Pas de header aan in ingeklapte staat */
 .history-sidebar.collapsed .history-header {
-    justify-content: center;
+    justify-content: center; /* Dit is correct, want .history-header is display:flex */
     margin-bottom: 0;
+    width: 100%; /* FIX: Forceer de header om 100% (dus 80px) breed te zijn */
 }
 
-
-
+/* Draai de knop */
+.history-sidebar.collapsed .history-toggle-btn svg {
+    transform: rotate(180deg);
+}
 /* Pas de mobiele weergave aan om de knop ook te verbergen */
 @media (max-width: 768px) {
     .history-toggle-btn {
