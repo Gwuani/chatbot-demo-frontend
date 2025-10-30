@@ -63,6 +63,34 @@ body {
     background-color: #e0e0e5;
 }
 
+/* --- DE INGEKLAPTE STAAT --- */
+.history-sidebar.collapsed {
+    flex: 0 1 80px; /* Krimp naar een vaste breedte van 80px */
+    min-width: 80px;
+    align-items: center; /* Centreer de knop */
+}
+
+/* Verberg de titel en lijst als de sidebar ingeklapt is */
+.history-sidebar.collapsed .history-header h4,
+.history-sidebar.collapsed .chat-history-list {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Centreer de knop als de sidebar ingeklapt is */
+.history-sidebar.collapsed .history-header {
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+
+
+/* Pas de mobiele weergave aan om de knop ook te verbergen */
+@media (max-width: 768px) {
+    .history-toggle-btn {
+        display: none; /* Verberg de knop op mobiel, want de hele sidebar is weg */
+    }
+}
 /* Linker kolom: Hoofdchatgebied */
 .main-chat-area {
     flex: 3; /* Neemt meer ruimte in beslag dan de zijbalk */
