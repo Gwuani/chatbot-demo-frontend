@@ -3,30 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversational Interface</title>
+    <title>IT Operations Chatbot</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="chat-container">
-        <div class="chat-history">
-            <div class="message user-prompt">
-                <div class="message-content">
-                    <p>Kan je mij een voorbeeld geven van hoe een goeie chatbot html pagina eruit ziet?</p>
-                </div>
+    <div class="chatbot-wrapper">
+        <div class="main-chat-area">
+            <div class="chat-header">
+                <p>
+                    Hoi! Ik ben Stijn, jou vriendelijke <span class="ai-agent-highlight">AI Agent</span>. Hoe zou ik je vandaag kunnen helpen?
+                </p>
             </div>
-
-            <div class="message ai-response">
-                <div class="message-content">
-                    <p>Zeker! Een goede chatbotpagina is meer dan alleen een gespreksvenster...</p>
-                    </div>
+            <div class="chat-messages">
+                </div>
+            <div class="chat-input-area">
+                <input type="text" placeholder="Type here">
+                <button class="send-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
             </div>
         </div>
-    </div>
 
-    <div class="input-area">
-        <textarea placeholder="Typ hier je vraag..."></textarea>
-        <button>Verstuur</button>
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <h3 class="chatbot-name">Stijn <span class="ai-label">AI</span></h3>
+                <p class="chatbot-role">IT Operations Chatbot</p>
+                <div class="chatbot-avatar">
+                    <img src="../img/Stijn-chatbot.png" alt="Stijn AI Agent">
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

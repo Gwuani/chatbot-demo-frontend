@@ -1,60 +1,149 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
     margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Lichte grijze achtergrond */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif; /* Gebruik het gedefinieerde lettertype */
+}
+
+.chatbot-wrapper {
+    display: flex;
+    width: 90%; /* Of een vaste breedte, bijv. 1200px */
+    max-width: 1400px;
+    height: 80vh; /* Of een vaste hoogte, bijv. 700px */
+    max-height: 900px;
+    background-color: #ffffff;
+    border-radius: 25px; /* Afgeronde hoeken voor de hele container */
+    overflow: hidden; /* Zorgt dat content binnen de afgeronde hoeken blijft */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Linker kolom: Hoofdchatgebied */
+.main-chat-area {
+    flex: 3; /* Neemt meer ruimte in beslag dan de zijbalk */
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    padding: 30px; /* Binnenste padding */
+    background-color: #fcfbff; /* Iets lichtere achtergrond voor de chat */
 }
 
-.chat-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 20px;
+.chat-header {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #333;
 }
 
-.message {
-    max-width: 80%;
-    margin: 10px auto;
-    padding: 15px;
-    border-radius: 18px;
+.ai-agent-highlight {
+    font-weight: 600; /* Dikker lettertype */
+    color: #85CC97; /* Laurens groen */
 }
 
-.user-prompt {
-    background-color: #e9e9eb;
-    margin-left: auto; /* Lijn rechts uit */
-    margin-right: 0;
+.chat-messages {
+    flex-grow: 1; /* Neemt alle beschikbare verticale ruimte in beslag */
+    overflow-y: auto; /* Zorgt voor scrollen als er veel berichten zijn */
+    padding-bottom: 20px; /* Ruimte boven de invoerbalk */
 }
 
-.ai-response {
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    margin-right: auto; /* Lijn links uit */
-    margin-left: 0;
-}
-
-.input-area {
+.chat-input-area {
     display: flex;
-    padding: 20px;
-    background-color: #ffffff;
-    border-top: 1px solid #ddd;
+    align-items: center;
+    background-color: #f0f0f5; /* Lichte achtergrond voor invoerbalk */
+    border-radius: 20px;
+    padding: 10px 15px;
+    margin-top: 20px; /* Ruimte boven de invoerbalk */
 }
 
-.input-area textarea {
+.chat-input-area input[type="text"] {
     flex-grow: 1;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 16px;
-    resize: none; /* Voorkomt dat de gebruiker het formaat kan wijzigen */
+    border: none;
+    background: transparent;
+    padding: 8px 10px;
+    font-size: 1em;
+    outline: none; /* Verwijdert de focus-rand */
+    color: #333;
 }
 
-.input-area button {
-    margin-left: 10px;
-    padding: 10px 20px;
+.chat-input-area input::placeholder {
+    color: #a0a0a0;
+}
+
+/* AANGEPAST: Stijl voor de Verstuur knop met SVG-icoon */
+.send-btn {
+    background-color: #85CC97; /* Laurens groen */
+    color: white; /* Kleur voor de SVG vulling */
     border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px;
+    border-radius: 50%; /* Maakt de knop rond */
+    width: 40px; /* Vaste breedte */
+    height: 40px; /* Vaste hoogte */
+    display: flex; /* Gebruik flexbox om SVG te centreren */
+    justify-content: center; /* Horizontaal centreren */
+    align-items: center; /* Verticaal centreren */
+    margin-left: 10px;
     cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Lichte schaduw */
+    transition: background-color 0.2s ease;
+}
+
+.send-btn:hover {
+    background-color: #6fb87c; /* Iets donkerder groen bij hover */
+}
+
+.send-btn svg {
+    fill: white; /* Kleurt de pijl wit */
+}
+
+
+/* Rechter kolom: Zijbalk */
+.sidebar {
+    flex: 1;
+    background-color: #eaf8e2; /* Of welke kleur je hier ook hebt staan */
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #333;
+}
+
+.sidebar-content{
+    margin-top: 2vh;
+}
+.chatbot-name {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.ai-label {
+    background-color: #85CC97; /* Laurens groen */
+    color: white;
+    font-size: 0.7em;
+    padding: 4px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-weight: 400;
+}
+
+.chatbot-role {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.chatbot-avatar img {
+    width: 100%;
+    max-width: 350px; /* Houd deze zoals je wilt, of pas aan naar bijv. 200px */
+    height: auto;
+    border-radius: 0; /* GEEN afgeronde hoeken op de afbeelding zelf */
+    
+    /* NIEUW: Subtiele schaduw */
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1)); 
+    /* Gebruik 'filter: drop-shadow' i.p.v. 'box-shadow' voor transparante PNG's! */
 }
