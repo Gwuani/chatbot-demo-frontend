@@ -45,15 +45,6 @@ body {
 }
 
 /* --- 2. De Header (met Titel en Knop) --- */
-.history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    /* Zorgt dat de header zelf ook soepel meebeweegt */
-    transition: margin 0.4s ease-in-out;
-}
-
 .history-header h4 {
     margin: 0;
     font-weight: 600;
@@ -69,22 +60,13 @@ body {
                 margin 0.4s ease-in-out;
 }
 
+
 /* --- 3. De Inklap-knop --- */
 .history-toggle-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
-
-    /* FIX: Vaste afmeting zodat hij niet krimpt */
-    width: 40px;
-    height: 40px;
-    padding: 0; 
-    flex-shrink: 0; /* Extra garantie: de knop mag NOOIT krimpen */
+    /* ... (bestaande regels zoals width, height, etc.) ... */
+    
+    /* VOEG DIT TOE: */
+    margin-right: 15px; /* Altijd een beetje ruimte */
 }
 
 .history-toggle-btn svg {
@@ -124,51 +106,61 @@ body {
 
 
 /* ======================================= */
-/* --- DE INGEKLAPTE STAAT (ALLES-IN-1) --- */
+/* --- LOGICA VOOR IN- EN UITKLAPPEN --- */
 /* ======================================= */
 
-.history-sidebar.collapsed {
+/* STANDAARD (Desktop = ingeklapt) */
+.history-sidebar {
     flex: 0 1 80px; /* Krimp naar 80px */
     min-width: 80px;
-    overflow: hidden; /* Verberg alle scrollbars */
+    overflow: hidden; 
     white-space: normal; 
-    
-    /* FIX: Reset padding, behoud alleen padding-top */
     padding: 30px 0 0 0; 
-    /* De display:flex en justify-content zijn hier verwijderd */
+    display: flex;
+    justify-content: center;
 }
-
-/* Verberg de titel */
-.history-sidebar.collapsed .history-header h4 {
-    opacity: 0;
-    max-width: 0;
-    margin: 0;
+.history-header {
+    justify-content: center;
+    margin-bottom: 0;
+    width: auto; 
 }
-
-/* Verberg de lijst */
-.history-sidebar.collapsed .chat-history-list {
+.history-header h4,
+.chat-history-list {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.1s ease-out, visibility 0.1s; /* Sneller verbergen */
+    transition: opacity 0.1s ease-out, visibility 0.1s;
 }
-
-/* Pas de header aan in ingeklapte staat */
-.history-sidebar.collapsed .history-header {
-    justify-content: center; /* Dit is correct, want .history-header is display:flex */
-    margin-bottom: 0;
-    width: 100%; /* FIX: Forceer de header om 100% (dus 80px) breed te zijn */
-}
-
-/* Draai de knop */
-.history-sidebar.collapsed .history-toggle-btn svg {
+.history-toggle-btn svg {
     transform: rotate(180deg);
 }
-/* Pas de mobiele weergave aan om de knop ook te verbergen */
-@media (max-width: 768px) {
-    .history-toggle-btn {
-        display: none; /* Verberg de knop op mobiel, want de hele sidebar is weg */
-    }
+
+
+/* OPEN STAAT (Desktop = uitgeklapt) */
+.history-sidebar.is-open {
+    flex: 1;
+    min-width: 250px;
+    padding: 30px;
+    white-space: nowrap; 
+    display: block; /* Reset de flex-eigenschappen */
 }
+.history-sidebar.is-open .history-header {
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.history-sidebar.is-open .history-header h4,
+.history-sidebar.is-open .chat-history-list {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s 0.1s ease-out, visibility 0.2s 0.1s;
+}
+.history-sidebar.is-open .history-header h4 {
+     max-width: 200px; /* Zorg dat de titel weer de max-width heeft */
+}
+.history-sidebar.is-open .history-toggle-btn svg {
+    transform: rotate(0deg); /* Roteer terug */
+}
+
 /* Linker kolom: Hoofdchatgebied */
 .main-chat-area {
     flex: 3; /* Neemt meer ruimte in beslag dan de zijbalk */
@@ -179,9 +171,18 @@ body {
 }
 
 .chat-header {
+    /* Dit waren je bestaande regels */
     margin-bottom: 20px;
     font-size: 1.1em;
     color: #333;
+    
+    /* NIEUWE REGELS: Zorgt dat knop en tekst goed staan */
+    display: flex;
+    align-items: center;
+}
+
+.chat-header p {
+    margin: 0; /* Verwijder standaard <p> marge */
 }
 
 .ai-agent-highlight {
@@ -297,29 +298,98 @@ body {
 }
 
 /* ======================================= */
-/* Mobiele Responsive Stijlen     */
+/* Tablet & Mobiel Responsive Stijlen  */
 /* ======================================= */
 
-/* Deze regels gelden alleen voor schermen van 768px of smaller */
-@media (max-width: 768px) {
-    
-    /* 1. Verberg BEIDE zijbalken */
-    .sidebar,
-    .history-sidebar {
+@media (max-width: 1024px) {
+
+    /* 1. Verberg de rechter (avatar) sidebar */
+    .sidebar {
         display: none;
     }
 
-    /* 2. Laat de chat-wrapper het HELE scherm vullen */
-    .chatbot-wrapper {
-        width: 100%;
-        height: 100vh; /* 100% van de vensterhoogte */
-        max-height: 100vh;
-        border-radius: 0; /* Geen afgeronde hoeken op mobiel */
-        box-shadow: none;   /* Geen schaduw op mobiel */
+    /* 2. Chat-area vult nu de volledige breedte */
+    .main-chat-area {
+        flex: 1; /* Neemt alle (100%) ruimte in */
     }
 
-    /* 3. Pas de padding aan voor een kleiner scherm */
+    /* 3. MOBIEL: Sidebar is standaard verborgen (van scherm af) */
+    .history-sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 1000;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        min-width: 250px; 
+        
+        /* De animatie is nu op transform (verschuiven) */
+        transition: transform 0.4s ease-in-out;
+        transform: translateX(-100%); /* Standaard verborgen */
+        
+        /* Reset de desktop-stijlen */
+        display: block;
+        padding: 30px;
+        white-space: nowrap;
+    }
+
+    /* 4. MOBIEL: 'is-open' betekent "schuif in beeld" */
+    .history-sidebar.is-open {
+        transform: translateX(0); /* Schuif in beeld */
+    }
+    
+    /* 5. MOBIEL: Herstel de header- en content-stijlen */
+    .history-sidebar.is-open .history-header {
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .history-sidebar.is-open .history-header h4,
+    .history-sidebar.is-open .chat-history-list {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* 6. MOBIEL: Knop rotatie */
+    .history-toggle-btn svg {
+        transform: rotate(0deg); /* Standaard (gesloten) */
+    }
+    .history-sidebar.is-open .history-toggle-btn svg {
+        /* Deze regel is niet nodig, want de knop zit niet in de sidebar */
+    }
+    /* We moeten de rotatie aan de body-class koppelen */
+    body.history-open .history-toggle-btn svg {
+         transform: rotate(180deg); /* Roteer als open */
+    }
+
+    /* 7. Wrapper aanpassen (zoals je al had) */
+    .chatbot-wrapper {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    /* 8. Padding aanpassen (zoals je al had) */
     .main-chat-area {
         padding: 20px;
     }
+
+    /* Overlay voor mobiel menu */
+.history-overlay {
+    display: none; /* Standaard verborgen */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999; /* Ligt onder de sidebar, maar boven de rest */
+}
+
+/* Toon overlay als het menu open is */
+body.history-open .history-overlay {
+    display: block;
+}
 }
