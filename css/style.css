@@ -354,9 +354,6 @@ body {
     .history-toggle-btn svg {
         transform: rotate(0deg); /* Standaard (gesloten) */
     }
-    .history-sidebar.is-open .history-toggle-btn svg {
-        /* Deze regel is niet nodig, want de knop zit niet in de sidebar */
-    }
     /* We moeten de rotatie aan de body-class koppelen */
     body.history-open .history-toggle-btn svg {
          transform: rotate(180deg); /* Roteer als open */
