@@ -1,15 +1,33 @@
+<!-- ======================================= -->
+<!-- CHATBOT FRONTEND HTML -->
+<!-- ======================================= -->
+<!-- Dit is de hoof HTML structuur voor de chatbot interface.
+     Backend ontwikkelaars kunnen dit integreren in hun applicaties.
+     Belangrijke gebieden voor dynamische content:
+     - .chat-messages: Voeg chat berichten hier toe
+     - .chat-history-list: Voeg chat geschiedenis items hier toe
+     - Input veld: Verbind met backend API voor het verzenden van berichten -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Operations Chatbot</title>
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="../style/style.css">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Main chatbot container -->
     <div class="chatbot-wrapper">
+
+        <!-- Left sidebar: Chat history -->
         <div class="history-sidebar" id="history-sidebar">
+
+            <!-- Desktop toggle button -->
             <button class="history-toggle-btn" id="desktop-toggle-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -17,6 +35,8 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </button>
+
+            <!-- New chat button -->
             <button class="new-chat-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -24,18 +44,49 @@
                 </svg>
                 <span>Nieuwe Chat</span>
             </button>
+
+            <!-- History header -->
             <div class="history-header">
                 <h4>Chat Geschiedenis</h4>
             </div>
+
+            <!-- Chat geschiedenis lijst - BACKEND: Voeg dynamische chat geschiedenis items hier toe -->
             <ul class="chat-history-list">
                 <li><a href="#">Installatie Hulp Printer</a></li>
                 <li><a href="#">Reset Wachtwoord (oud)</a></li>
                 <li><a href="#">VPN Verbindingsprobleem</a></li>
                 <li><a href="#">Nieuwe Muis Aanvragen</a></li>
             </ul>
+
+            <!-- Dark mode toggle -->
+            <div class="theme-toggle-container">
+                <button id="dark-mode-toggle-logo">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <span>Modus</span>
+                </button>
+            </div>
         </div>
+
+        <!-- Main chat area -->
         <div class="main-chat-area">
+
+            <!-- Chat header -->
             <div class="chat-header">
+
+                <!-- Mobile toggle button -->
                 <button class="history-toggle-btn" id="mobile-toggle-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -43,20 +94,36 @@
                         <line x1="3" y1="18" x2="21" y2="18"></line>
                     </svg>
                 </button>
+
                 <p>
                     Hoi! Ik ben Stijn, jou vriendelijke <span class="ai-agent-highlight">AI Agent</span>. Hoe zou ik je vandaag kunnen helpen?
                 </p>
             </div>
-            <div class="chat-messages"></div>
+
+            <!-- Chat berichten container - BACKEND: Voeg chat berichten hier toe -->
+            <div class="chat-messages">
+                <!-- Voorbeeld bericht structuur:
+                <div class="message bot-message">
+                    <p>Hallo! Hoe kan ik je vandaag helpen?</p>
+                </div>
+                <div class="message user-message">
+                    <p>Ik heb hulp nodig met mijn printer.</p>
+                </div>
+                -->
+            </div>
+
+            <!-- Input area -->
             <div class="chat-input-area">
-                <input type="text" placeholder="Type here">
-                <button class="send-btn">
+                <input type="text" placeholder="Type here" id="chat-input">
+                <button class="send-btn" id="send-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
                         <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                     </svg>
                 </button>
             </div>
         </div>
+
+        <!-- Right sidebar: Avatar -->
         <div class="sidebar">
             <div class="sidebar-content">
                 <h3 class="chatbot-name">Stijn <span class="ai-label">AI</span></h3>
@@ -67,7 +134,13 @@
             </div>
         </div>
     </div>
+
+    <!-- Overlay for mobile sidebar -->
     <div class="history-overlay" id="history-overlay"></div>
+
+    <!-- JavaScript -->
     <script src="../js/script.js"></script>
+</body>
+</html>
 </body>
 </html>

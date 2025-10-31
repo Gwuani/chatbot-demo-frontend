@@ -1,16 +1,57 @@
 /* ======================================= */
-/* 1. BASE STYLES */
+/* CSS VARIABLES FOR DARK MODE THEMING */
 /* ======================================= */
+:root {
+    /* Licht Thema (Standaard) */
+    --body-bg: #f0f2f5;
+    --wrapper-bg: #ffffff;
+    --sidebar-left-bg: #fcfbff;
+    --sidebar-right-bg: #eaf8e2;
+    --text-color: #333;
+    --text-color-light: #555;
+    --border-color: #e0e0e0;
+    --input-area-bg: #f0f0f5;
+    --bot-message-bg: #f0f0f5;
+    --user-message-bg: #eaf8e2;
+    --history-link-bg: #f0f0f5;
+    --history-link-hover-bg: #e0e0e5;
+    --highlight-color: #85CC97; /* Laurens groen */
+    --svg-stroke: #555;
+    --svg-fill: white;
+}
 
+body.dark-mode {
+    /* Donker Thema */
+    --body-bg: #121212;
+    --wrapper-bg: #1e1e1e;
+    --sidebar-left-bg: #1e1e1e;
+    --sidebar-right-bg: #2a2a2a;
+    --text-color: #f1f1f1;
+    --text-color-light: #aaa;
+    --border-color: #333;
+    --input-area-bg: #333;
+    --bot-message-bg: #333;
+    --user-message-bg: #2f3b2c; /* Donkergroen */
+    --history-link-bg: #333;
+    --history-link-hover-bg: #444;
+    --svg-stroke: #aaa;
+    --svg-fill: #1e1e1e;
+}
+
+/* ======================================= */
+/* BASE STYLES */
+/* ======================================= */
 body {
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5;
+    background-color: var(--body-bg);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
+    color: var(--text-color); /* Standaard tekstkleur */
+    transition: background-color 0.3s ease; /* Soepele overgang */
 }
 
 .chatbot-wrapper {
@@ -19,35 +60,34 @@ body {
     max-width: 1400px;
     height: 80vh;
     max-height: 900px;
-    background-color: #ffffff;
+    background-color: var(--wrapper-bg);
     border-radius: 25px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 /* ======================================= */
-/* 2. HISTORY SIDEBAR */
+/* LEFT SIDEBAR: CHAT HISTORY */
 /* ======================================= */
 
-/* Default collapsed state (Desktop) */
 .history-sidebar {
     flex: 0 1 80px;
     min-width: 80px;
-    background-color: #fcfbff;
-    border-right: 1px solid #e0e0e0;
+    background-color: var(--sidebar-left-bg);
+    border-right: 1px solid var(--border-color);
     overflow: hidden;
     white-space: normal;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px 0;
-    transition: min-width 0.4s ease-in-out, flex 0.4s ease-in-out, padding 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     justify-content: flex-start;
 }
 
-/* New chat button (collapsed) */
 .new-chat-btn {
-    background-color: #f0f0f5;
+    background-color: var(--history-link-bg);
     border: none;
     cursor: pointer;
     display: flex;
@@ -61,22 +101,18 @@ body {
     flex-shrink: 0;
     margin-bottom: 20px;
 }
-
 .new-chat-btn svg {
-    stroke: #333;
+    stroke: var(--svg-stroke);
 }
-
 .new-chat-btn span {
     display: none;
     opacity: 0;
     transition: opacity 0.2s ease-out;
 }
-
 .new-chat-btn:hover {
-    background-color: #e0e0e5;
+    background-color: var(--history-link-hover-bg);
 }
 
-/* History content (collapsed) */
 .history-sidebar:not(.is-open) .history-header,
 .history-sidebar:not(.is-open) .chat-history-list {
     display: none;
@@ -84,30 +120,29 @@ body {
     visibility: hidden;
 }
 
-/* Expanded state (Desktop) */
+/* --- OPEN STAAT --- */
 .history-sidebar.is-open {
     flex: 1;
     min-width: 250px;
     padding: 30px;
     white-space: nowrap;
-    display: block;
+    display: flex;
+    flex-direction: column;
     align-items: stretch;
 }
-
+/* Herstel de "Nieuwe Chat" knop in de open staat */
 .history-sidebar.is-open .new-chat-btn {
-    width: 100%;
-    justify-content: flex-start;
+    width: 100%; 
+    justify-content: flex-start; 
     padding: 10px 15px;
 }
-
 .history-sidebar.is-open .new-chat-btn span {
     display: inline;
     opacity: 1;
     margin-left: 10px;
     font-weight: 600;
-    color: #333;
+    color: var(--text-color);
 }
-
 .history-sidebar.is-open .history-header {
     display: flex;
     justify-content: space-between;
@@ -115,16 +150,14 @@ body {
     margin-bottom: 20px;
     width: 100%;
 }
-
 .history-sidebar.is-open .history-header h4 {
     margin: 0;
     font-weight: 600;
-    color: #555;
+    color: var(--text-color-light);
     display: block;
     opacity: 1;
     visibility: visible;
 }
-
 .history-sidebar.is-open .chat-history-list {
     display: block;
     list-style: none;
@@ -132,75 +165,74 @@ body {
     margin: 0;
     opacity: 1;
     visibility: visible;
+    flex-grow: 1; /* Vertel de lijst om alle beschikbare ruimte in te nemen */
+    overflow-y: auto; /* Zorg dat de lijst kan scrollen als hij te lang wordt */
+    margin-bottom: 20px; /* Ruimte tussen de lijst en de knop eronder */
 }
-
 .chat-history-list li {
     margin-bottom: 10px;
 }
-
 .chat-history-list a {
     text-decoration: none;
-    color: #444;
-    background-color: #f0f0f5;
+    color: var(--text-color-light);
+    background-color: var(--history-link-bg);
     display: block;
     padding: 10px 15px;
     border-radius: 8px;
     font-size: 0.9em;
     transition: background-color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-
 .chat-history-list a:hover {
-    background-color: #e0e0e5;
+    background-color: var(--history-link-hover-bg);
 }
 
 /* ======================================= */
-/* 3. MAIN CHAT AREA */
+/* MAIN CHAT AREA */
 /* ======================================= */
-
 .main-chat-area {
     flex: 3;
     display: flex;
     flex-direction: column;
     padding: 30px;
-    background-color: #fcfbff;
+    background-color: var(--sidebar-left-bg); /* Zelfde als linker sidebar */
 }
 
 .chat-header {
     font-size: 1.1em;
-    color: #333;
+    color: var(--text-color);
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
-
 .chat-header p {
     margin: 0;
 }
-
 .ai-agent-highlight {
     font-weight: 600;
-    color: #85CC97;
+    color: var(--highlight-color);
 }
 
-/* History toggle buttons */
+/* --- De Twee Knoppen --- */
 #desktop-toggle-btn {
     background: transparent;
     border: none;
     cursor: pointer;
-    display: flex;
+    display: flex; 
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     transition: background-color 0.2s ease;
     width: 40px;
     height: 40px;
-    padding: 0;
+    padding: 0; 
     flex-shrink: 0;
     margin-bottom: 20px;
 }
-
 #desktop-toggle-btn:hover {
-    background-color: #f0f0f5;
+    background-color: var(--history-link-bg);
 }
 
 #mobile-toggle-btn {
@@ -214,35 +246,67 @@ body {
     transition: background-color 0.2s ease;
     width: 40px;
     height: 40px;
-    padding: 0;
+    padding: 0; 
     flex-shrink: 0;
     margin-right: 15px;
 }
-
 #mobile-toggle-btn:hover {
-    background-color: #f0f0f5;
+    background-color: var(--history-link-bg);
 }
-
+.history-toggle-btn svg {
+    stroke: var(--svg-stroke);
+    transition: transform 0.4s ease-in-out;
+    transform: rotate(180deg); 
+}
 .history-sidebar.is-open .history-toggle-btn svg,
 body.history-open .history-toggle-btn svg {
-    transform: rotate(0deg);
+    transform: rotate(0deg); 
 }
 
+/* --- Chat Berichten --- */
 .chat-messages {
     flex-grow: 1;
     overflow-y: auto;
     padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
+.message {
+    display: flex;
+    margin-bottom: 10px;
+    max-width: 75%;
+}
+.message p {
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 18px;
+    line-height: 1.4;
+}
+.bot-message {
+    align-self: flex-start;
+}
+.bot-message p {
+    background-color: var(--bot-message-bg);
+    color: var(--text-color);
+}
+.user-message {
+    align-self: flex-end;
+}
+.user-message p {
+    background-color: var(--user-message-bg);
+    color: var(--text-color);
+}
+
+/* --- Input Veld --- */
 .chat-input-area {
     display: flex;
     align-items: center;
-    background-color: #f0f0f5;
+    background-color: var(--input-area-bg);
     border-radius: 20px;
     padding: 10px 15px;
     margin-top: 20px;
 }
-
 .chat-input-area input[type="text"] {
     flex-grow: 1;
     border: none;
@@ -250,15 +314,14 @@ body.history-open .history-toggle-btn svg {
     padding: 8px 10px;
     font-size: 1em;
     outline: none;
-    color: #333;
+    color: var(--text-color);
 }
-
 .chat-input-area input::placeholder {
-    color: #a0a0a0;
+    color: var(--text-color-light);
 }
 
 .send-btn {
-    background-color: #85CC97;
+    background-color: var(--highlight-color);
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -271,23 +334,19 @@ body.history-open .history-toggle-btn svg {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s ease;
 }
-
 .send-btn:hover {
     background-color: #6fb87c;
 }
-
 .send-btn svg {
-    fill: white;
+    fill: var(--svg-fill);
 }
 
-
 /* ======================================= */
-/* 4. SIDEBAR */
+/* RIGHT SIDEBAR: AVATAR */
 /* ======================================= */
-
 .sidebar {
     flex: 1;
-    background-color: #eaf8e2;
+    background-color: var(--sidebar-right-bg);
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     padding: 30px;
@@ -295,22 +354,20 @@ body.history-open .history-toggle-btn svg {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    color: #333;
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
 }
-
-.sidebar-content {
+.sidebar-content{
     margin-top: 2vh;
 }
-
 .chatbot-name {
     font-size: 1.8em;
     font-weight: 700;
     margin-top: 10px;
     margin-bottom: 5px;
 }
-
 .ai-label {
-    background-color: #85CC97;
+    background-color: var(--highlight-color);
     color: white;
     font-size: 0.7em;
     padding: 4px 8px;
@@ -319,26 +376,94 @@ body.history-open .history-toggle-btn svg {
     margin-left: 5px;
     font-weight: 400;
 }
-
 .chatbot-role {
     font-size: 0.9em;
-    color: #555;
+    color: var(--text-color-light);
     margin-bottom: 30px;
 }
-
 .chatbot-avatar img {
     width: 100%;
     max-width: 350px;
     height: auto;
     border-radius: 0;
-    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1)); 
+}
+
+/* Dark mode toggle button */
+#dark-mode-toggle-logo {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    flex-shrink: 0;
+    margin: 0 auto 10px auto;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#dark-mode-toggle-logo:hover {
+    background-color: var(--history-link-bg);
+}
+
+#dark-mode-toggle-logo svg {
+    stroke: var(--svg-stroke);
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+#dark-mode-toggle-logo span {
+    display: none;
+    opacity: 0;
+    margin-left: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Icon switching logic */
+.moon-icon { display: none; }
+.sun-icon { display: block; }
+
+body.dark-mode .moon-icon { display: block; }
+body.dark-mode .sun-icon { display: none; }
+
+/* Expanded sidebar styles */
+.history-sidebar.is-open .theme-toggle-container {
+    padding: 0 30px;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+.history-sidebar.is-open #dark-mode-toggle-logo {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 15px;
+    margin: 0 0 10px 0;
+}
+
+.history-sidebar.is-open #dark-mode-toggle-logo span {
+    display: inline;
+    opacity: 1;
 }
 
 /* ======================================= */
-/* 5. RESPONSIVE DESIGN */
+/* Responsive Design */
 /* ======================================= */
-
 @media (max-width: 1024px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-chat-area {
+        flex: 1;
+        padding: 20px 15px;
+    }
+
     #desktop-toggle-btn {
         display: none;
     }
@@ -347,25 +472,13 @@ body.history-open .history-toggle-btn svg {
         display: flex;
     }
 
-    /* Hide right sidebar (avatar) */
-    .sidebar {
-        display: none;
-    }
-
-    /* Chat area fills full width */
-    .main-chat-area {
-        flex: 1;
-        padding: 20px 15px;
-    }
-
-    /* Mobile: Sidebar hidden off-screen by default */
     .history-sidebar {
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
         z-index: 1000;
-        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
         min-width: 250px;
         transform: translateX(-100%);
         display: block;
@@ -374,12 +487,10 @@ body.history-open .history-toggle-btn svg {
         transition: transform 0.4s ease-in-out;
     }
 
-    /* Mobile: 'is-open' slides sidebar into view */
     .history-sidebar.is-open {
         transform: translateX(0);
     }
 
-    /* Mobile: Restore header/content styles when open */
     .history-sidebar.is-open .new-chat-btn,
     .history-sidebar.is-open .history-header,
     .history-sidebar.is-open .chat-history-list {
@@ -396,7 +507,6 @@ body.history-open .history-toggle-btn svg {
         display: flex;
     }
 
-    /* Mobile: Button rotation */
     .history-toggle-btn svg {
         transform: rotate(0deg);
     }
@@ -405,7 +515,6 @@ body.history-open .history-toggle-btn svg {
         transform: rotate(180deg);
     }
 
-    /* Adjust wrapper */
     .chatbot-wrapper {
         width: 100%;
         height: 100vh;
@@ -414,19 +523,16 @@ body.history-open .history-toggle-btn svg {
         box-shadow: none;
     }
 
-    /* Improve header */
     .main-chat-area .chat-header p {
         font-size: 1em;
         line-height: 1.4;
     }
 
-    /* Improve input area */
     .chat-input-area {
         padding: 8px 12px;
         margin-top: 15px;
     }
 
-    /* Overlay */
     .history-overlay {
         display: none;
         position: fixed;
@@ -441,4 +547,35 @@ body.history-open .history-toggle-btn svg {
     body.history-open .history-overlay {
         display: block;
     }
+}
+
+/* Force alignment fixes for open sidebar */
+.history-sidebar.is-open #desktop-toggle-btn {
+    align-self: flex-start !important;
+    margin-left: 0 !important;
+}
+
+.history-sidebar.is-open #dark-mode-toggle-logo {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+/* Ensure buttons align at bottom */
+.history-sidebar .theme-toggle-container {
+    margin-top: auto !important;
+}
+
+.history-sidebar.is-open {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.history-sidebar.is-open .chat-history-list {
+    flex-grow: 1 !important;
+    overflow-y: auto !important;
+    margin-bottom: 20px !important;
+}
+
+.history-sidebar.is-open .theme-toggle-container {
+    margin-top: 0 !important;
 }
