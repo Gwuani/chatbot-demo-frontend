@@ -61,6 +61,7 @@ body {
     flex-shrink: 0;
     margin-bottom: 20px;
 }
+
 .new-chat-btn svg {
     stroke: #333;
 }
@@ -70,6 +71,7 @@ body {
     opacity: 0;
     transition: opacity 0.2s ease-out;
 }
+
 .new-chat-btn:hover {
     background-color: #e0e0e5;
 }
@@ -97,6 +99,7 @@ body {
     justify-content: flex-start;
     padding: 10px 15px;
 }
+
 .history-sidebar.is-open .new-chat-btn span {
     display: inline;
     opacity: 1;
@@ -130,6 +133,7 @@ body {
     opacity: 1;
     visibility: visible;
 }
+
 .chat-history-list li {
     margin-bottom: 10px;
 }
@@ -152,6 +156,7 @@ body {
 /* ======================================= */
 /* 3. MAIN CHAT AREA */
 /* ======================================= */
+
 .main-chat-area {
     flex: 3;
     display: flex;
@@ -167,15 +172,18 @@ body {
     align-items: center;
     margin-bottom: 20px;
 }
+
 .chat-header p {
     margin: 0;
 }
+
 .ai-agent-highlight {
     font-weight: 600;
     color: #85CC97;
 }
 
 /* History toggle button */
+/* De hamburger-knop (nu in .history-sidebar) */
 .history-toggle-btn {
     background: transparent;
     border: none;
@@ -189,7 +197,7 @@ body {
     height: 40px;
     padding: 0;
     flex-shrink: 0;
-    margin-right: 15px;
+    margin-bottom: 20px;
 }
 
 .history-toggle-btn:hover {
@@ -221,6 +229,7 @@ body.history-open .history-toggle-btn svg {
     padding: 10px 15px;
     margin-top: 20px;
 }
+
 .chat-input-area input[type="text"] {
     flex-grow: 1;
     border: none;
@@ -262,6 +271,7 @@ body.history-open .history-toggle-btn svg {
 /* ======================================= */
 /* 4. SIDEBAR */
 /* ======================================= */
+
 .sidebar {
     flex: 1;
     background-color: #eaf8e2;
@@ -314,6 +324,7 @@ body.history-open .history-toggle-btn svg {
 /* ======================================= */
 /* 5. RESPONSIVE DESIGN */
 /* ======================================= */
+
 @media (max-width: 1024px) {
     /* Hide right sidebar (avatar) */
     .sidebar {
