@@ -182,9 +182,8 @@ body {
     color: #85CC97;
 }
 
-/* History toggle button */
-/* De hamburger-knop (nu in .history-sidebar) */
-.history-toggle-btn {
+/* History toggle buttons */
+#desktop-toggle-btn {
     background: transparent;
     border: none;
     cursor: pointer;
@@ -200,14 +199,28 @@ body {
     margin-bottom: 20px;
 }
 
-.history-toggle-btn:hover {
+#desktop-toggle-btn:hover {
     background-color: #f0f0f5;
 }
 
-.history-toggle-btn svg {
-    stroke: #555;
-    transition: transform 0.4s ease-in-out;
-    transform: rotate(180deg);
+#mobile-toggle-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+#mobile-toggle-btn:hover {
+    background-color: #f0f0f5;
 }
 
 .history-sidebar.is-open .history-toggle-btn svg,
@@ -326,6 +339,14 @@ body.history-open .history-toggle-btn svg {
 /* ======================================= */
 
 @media (max-width: 1024px) {
+    #desktop-toggle-btn {
+        display: none;
+    }
+
+    #mobile-toggle-btn {
+        display: flex;
+    }
+
     /* Hide right sidebar (avatar) */
     .sidebar {
         display: none;
