@@ -299,6 +299,7 @@ body {
 
 /* ======================================= */
 /* Tablet & Mobiel Responsive Stijlen  */
+/* (DIT VERVANGT AL JE OUDE @media BLOKKEN) */
 /* ======================================= */
 
 @media (max-width: 1024px) {
@@ -311,6 +312,7 @@ body {
     /* 2. Chat-area vult nu de volledige breedte */
     .main-chat-area {
         flex: 1; /* Neemt alle (100%) ruimte in */
+        padding: 20px 15px; /* 20px boven/onder, 15px links/rechts */
     }
 
     /* 3. MOBIEL: Sidebar is standaard verborgen (van scherm af) */
@@ -323,11 +325,11 @@ body {
         box-shadow: 5px 0 15px rgba(0,0,0,0.1);
         min-width: 250px; 
         
-        /* De animatie is nu op transform (verschuiven) */
+        /* Animatie voor inschuiven */
         transition: transform 0.4s ease-in-out;
         transform: translateX(-100%); /* Standaard verborgen */
         
-        /* Reset de desktop-stijlen */
+        /* Reset desktop-stijlen */
         display: block;
         padding: 30px;
         white-space: nowrap;
@@ -338,7 +340,7 @@ body {
         transform: translateX(0); /* Schuif in beeld */
     }
     
-    /* 5. MOBIEL: Herstel de header- en content-stijlen */
+    /* 5. MOBIEL: Herstel de header/content stijlen (als het open is) */
     .history-sidebar.is-open .history-header {
         justify-content: space-between;
         margin-bottom: 20px;
@@ -350,16 +352,27 @@ body {
         visibility: visible;
     }
     
-    /* 6. MOBIEL: Knop rotatie */
+    /* 6. FIX VOOR DE HEADER (HET GROOTSTE PROBLEEM) */
+    .main-chat-area .chat-header {
+        display: flex;
+        align-items: center; /* LIJNT ALLES VERTICAAL UIT */
+        margin-bottom: 15px; /* Iets minder ruimte */
+    }
+    .main-chat-area .chat-header p {
+        margin: 0; /* VERWIJDERT LELIJKE WITRUIMTE */
+        font-size: 1em; /* Maakt tekst iets kleiner, netter */
+        line-height: 1.4; /* Betere leesbaarheid */
+    }
+
+    /* 7. MOBIEL: Knop rotatie */
     .history-toggle-btn svg {
         transform: rotate(0deg); /* Standaard (gesloten) */
     }
-    /* We moeten de rotatie aan de body-class koppelen */
     body.history-open .history-toggle-btn svg {
          transform: rotate(180deg); /* Roteer als open */
     }
 
-    /* 7. Wrapper aanpassen (zoals je al had) */
+    /* 8. Wrapper aanpassen */
     .chatbot-wrapper {
         width: 100%;
         height: 100vh;
@@ -367,26 +380,26 @@ body {
         border-radius: 0;
         box-shadow: none;
     }
+
+    /* 9. INPUT BALK NETTER MAKEN */
+    .chat-input-area {
+        padding: 8px 12px; /* Iets compacter */
+        margin-top: 15px;
+    }
     
-    /* 8. Padding aanpassen (zoals je al had) */
-    .main-chat-area {
-        padding: 20px;
+    /* 10. OVERLAY (HIERHEEN VERPLAATST) */
+    .history-overlay {
+        display: none; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 999;
     }
 
-    /* Overlay voor mobiel menu */
-.history-overlay {
-    display: none; /* Standaard verborgen */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 999; /* Ligt onder de sidebar, maar boven de rest */
-}
-
-/* Toon overlay als het menu open is */
-body.history-open .history-overlay {
-    display: block;
-}
+    body.history-open .history-overlay {
+        display: block;
+    }
 }
