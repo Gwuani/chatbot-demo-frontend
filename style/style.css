@@ -1,4 +1,4 @@
-/* CSS Variables voor dark mode thema */
+/* CSS Variabelen voor dark mode thema */
 :root {
     /* Licht Thema (Standaard) */
     --body-bg: #f0f2f5;
@@ -36,7 +36,7 @@ body.dark-mode {
     --svg-fill: #1e1e1e;
 }
 
-/* Basisstijlen - Algemene pagina layout */
+/* Basisstijlen - Algemene pagina opmaak */
 html, body {
     margin: 0;
     padding: 0;
@@ -67,7 +67,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Linker kolom: History sidebar */
+/* Linker kolom: Geschiedenis sidebar */
 
 /* STANDAARD STAAT (Desktop = ingeklapt) */
 .history-sidebar {
@@ -490,7 +490,7 @@ body.dark-mode .sun-icon { display: none; }
 }
 
 
-/* Responsive design */
+/* Responsive design - Mobiele aanpassingen */
 @media (max-width: 1024px) {
 
     /* Verberg rechter sidebar */

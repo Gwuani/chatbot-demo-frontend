@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Sidebar toggle knoppen
     const toggleButtons = document.querySelectorAll(".history-toggle-btn");
     const historySidebar = document.getElementById("history-sidebar");
     const overlay = document.getElementById("history-overlay");
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         overlay.addEventListener("click", toggleMenu);
     }
 
+    // Dark mode toggle
     const darkModeToggleLogo = document.getElementById("dark-mode-toggle-logo");
 
     if (darkModeToggleLogo) {
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Nieuwe chat knop
     const newChatBtn = document.querySelector('.new-chat-btn');
 
     if (newChatBtn) {
@@ -55,11 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Chat elementen
     const chatInput = document.getElementById("chat-input");
     const sendBtn = document.getElementById("send-btn");
     const chatMessages = document.querySelector(".chat-messages");
     const quickReplyButtons = document.querySelectorAll(".quick-reply-btn");
 
+    // Bericht toevoegen aan chat
     const appendMessage = (text, type) => {
         const messageDiv = document.createElement("div");
         messageDiv.classList.add("message", type);
@@ -70,22 +75,42 @@ document.addEventListener("DOMContentLoaded", () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     };
 
+    // Berichten verzenden afhandelen - HIER BACKEND INTEGRATIE TOEVOEGEN
     const handleSendMessage = (messageText) => {
         const text = messageText.trim();
         if (text === "") return;
+
+        // User bericht tonen
         appendMessage(text, "user-message");
+
+        // Input veld legen
         if (chatInput.value !== "") {
             chatInput.value = "";
         }
+
+        // Suggestieknoppen verbergen
         const repliesContainer = document.querySelector(".quick-replies");
         if (repliesContainer) {
             repliesContainer.style.display = "none";
         }
+
+        // PYTHON BACKEND INTEGRATIE - Vervang deze timeout door echte API call
+        // Voorbeeld:
+        // fetch('/api/chat', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ message: text })
+        // })
+        // .then(response => response.json())
+        // .then(data => appendMessage(data.response, "bot-message"))
+        // .catch(error => appendMessage("Fout bij verbinden met backend", "bot-message"));
+
         setTimeout(() => {
             appendMessage("Bedankt voor uw bericht!", "bot-message");
         }, 1000);
     };
 
+    // Event listeners
     if (sendBtn) {
         sendBtn.addEventListener("click", () => handleSendMessage(chatInput.value));
     }
