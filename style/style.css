@@ -1,5 +1,5 @@
 /* ======================================= */
-/* KLEURVARIABELEN VOOR DARK MODE */
+/* 1. KLEURVARIABELEN (VOOR DARK MODE) */
 /* ======================================= */
 :root {
     /* Licht Thema (Standaard) */
@@ -39,7 +39,7 @@ body.dark-mode {
 }
 
 /* ======================================= */
-/* BASISSTIJLEN */
+/* 2. Basisstijlen */
 /* ======================================= */
 body {
     margin: 0;
@@ -68,7 +68,7 @@ body {
 }
 
 /* ======================================= */
-/* LINKER KOLOM: HISTORY SIDEBAR */
+/* 3. Linker kolom: History Sidebar */
 /* ======================================= */
 
 /* STANDAARD STAAT (Desktop = ingeklapt) */
@@ -129,8 +129,8 @@ body {
     min-width: 250px;
     padding: 30px;
     white-space: nowrap;
-    display: flex;
-    flex-direction: column;
+    display: flex; /* AANGEPAST */
+    flex-direction: column; /* AANGEPAST */
     align-items: stretch;
 }
 .history-sidebar.is-open .new-chat-btn {
@@ -167,9 +167,9 @@ body {
     margin: 0;
     opacity: 1;
     visibility: visible;
-    flex-grow: 1;
-    overflow-y: auto;
-    margin-bottom: 20px;
+    flex-grow: 1; /* AANGEPAST */
+    overflow-y: auto; /* AANGEPAST */
+    margin-bottom: 20px; /* AANGEPAST */
 }
 .chat-history-list li {
     margin-bottom: 10px;
@@ -192,7 +192,7 @@ body {
 }
 
 /* ======================================= */
-/* MIDDEN KOLOM: HOOFCHATGEBIED */
+/* 4. Midden kolom: Hoofdchatgebied */
 /* ======================================= */
 .main-chat-area {
     flex: 3;
@@ -217,7 +217,7 @@ body {
     color: var(--highlight-color);
 }
 
-/* TOGGLE KNOPPEN */
+/* --- De Twee Knoppen --- */
 #desktop-toggle-btn {
     background: transparent;
     border: none;
@@ -269,7 +269,7 @@ body.history-open .history-toggle-btn svg {
     transform: rotate(0deg); 
 }
 
-/* CHAT BERICHTEN */
+/* --- Chat Berichten --- */
 .chat-messages {
     flex-grow: 1;
     overflow-y: auto;
@@ -304,11 +304,11 @@ body.history-open .history-toggle-btn svg {
     width: fit-content;
 }
 
-/* SUGGESTIEKNOPPEN */
+/* --- Suggestieknoppen --- */
 .quick-replies {
     display: flex;
     flex-direction: column;
-    align-items: flex-start ; /* Lijn links uit */
+    align-items: flex-start; /* Lijn links uit */
     margin-top: 15px;
 }
 .quick-reply-btn {
@@ -332,7 +332,7 @@ body.history-open .history-toggle-btn svg {
     margin-bottom: 0;
 }
 
-/* INPUT VELD */
+/* --- Input Veld --- */
 .chat-input-area {
     display: flex;
     align-items: center;
@@ -376,7 +376,7 @@ body.history-open .history-toggle-btn svg {
 }
 
 /* ======================================= */
-/* RECHTER KOLOM: ZIJBALK */
+/* 5. Rechter kolom: Zijbalk */
 /* ======================================= */
 .sidebar {
     flex: 1;
@@ -424,14 +424,16 @@ body.history-open .history-toggle-btn svg {
 }
 
 /* ======================================= */
-/* DARK MODE LOGO-KNOP STIJLEN */
+/* 6. Dark Mode Logo-knop Stijlen */
 /* ======================================= */
 
+/* Dit is de 'doos' om de knop heen */
 .theme-toggle-container {
-    margin-top: auto; /* Duwt dit item naar de bodem */
+    margin-top: auto; /* *** DIT IS DE FIX VOOR BEIDE *** */
     width: 100%;
 }
 
+/* De knop zelf (standaard/dicht) */
 #dark-mode-toggle-logo {
     background: transparent;
     border: none;
@@ -443,7 +445,7 @@ body.history-open .history-toggle-btn svg {
     height: 40px;
     padding: 0; 
     flex-shrink: 0;
-    margin: 0 auto 10px auto; /* Centreert de knop-container (DICHT) */
+    margin: 0 auto 10px auto; /* Centreert de knop (DICHT) */
     border-radius: 8px;
     transition: all 0.3s ease;
 }
@@ -464,13 +466,13 @@ body.history-open .history-toggle-btn svg {
     color: var(--text-color);
 }
 
-/* ICONEN WISSELEN */
+/* Iconen wisselen */
 .moon-icon { display: none; }
 .sun-icon { display: block; }
 body.dark-mode .moon-icon { display: block; }
 body.dark-mode .sun-icon { display: none; }
 
-/* STIJL VOOR DE OPEN SIDEBAR */
+/* Stijl voor de OPEN sidebar */
 .history-sidebar.is-open #dark-mode-toggle-logo {
     width: 100%;
     justify-content: flex-start;
@@ -481,9 +483,19 @@ body.dark-mode .sun-icon { display: none; }
     display: inline;
     opacity: 1;
 }
+/* DESKTOP: Zorg dat dark mode knop altijd zichtbaar is onderaan */
+.history-sidebar.is-open .theme-toggle-container {
+    margin-top: auto !important;
+    position: sticky;
+    bottom: 0;
+    background-color: var(--sidebar-left-bg);
+    padding: 10px 0;
+    border-top: 1px solid var(--border-color);
+}
+
 
 /* ======================================= */
-/* RESPONSIVE DESIGN */
+/* 7. Responsive Design */
 /* ======================================= */
 @media (max-width: 1024px) {
 
@@ -496,7 +508,7 @@ body.dark-mode .sun-icon { display: none; }
         padding: 20px 15px;
     }
 
-    /* WISSEL DE KNOPPEN */
+    /* Wissel de knoppen */
     #desktop-toggle-btn {
         display: none;
     }
@@ -504,7 +516,7 @@ body.dark-mode .sun-icon { display: none; }
         display: flex;
     }
 
-    /* SIDEBAR WORDT EEN OVERLAY */
+    /* Sidebar wordt een overlay */
     .history-sidebar {
         position: absolute;
         top: 0;
@@ -523,7 +535,7 @@ body.dark-mode .sun-icon { display: none; }
         transform: translateX(0);
     }
     
-    /* HERSTEL STIJLEN IN DE MOBIELE 'OPEN' STAAT */
+    /* Herstel stijlen in de mobiele 'open' staat */
     .history-sidebar.is-open .new-chat-btn,
     .history-sidebar.is-open .history-header,
     .history-sidebar.is-open .chat-history-list {
@@ -549,7 +561,28 @@ body.dark-mode .sun-icon { display: none; }
         opacity: 1;
     }
 
-    /* KNOP ROTATIE OP MOBIEL */
+    /* ZORG DAT DARK MODE KNOP ALTIJD ZICHTBAAR IS ZONDER SCROLLEN */
+    .history-sidebar.is-open .theme-toggle-container {
+        margin-top: 0 !important;
+        order: 999; /* Plaats onderaan */
+        position: sticky;
+        bottom: 0;
+        background-color: var(--sidebar-left-bg);
+        padding: 10px 0;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .history-sidebar.is-open .chat-history-list {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+
+    flex-grow: 1; /* Vertel de lijst om alle ruimte in te nemen */
+    overflow-y: auto; /* Zorg dat de lijst kan scrollen */
+    margin-bottom: 20px; /* Ruimte boven de knop */
+}
+
+    /* Knop rotatie op mobiel */
     .history-toggle-btn svg {
         transform: rotate(0deg);
     }
@@ -557,7 +590,7 @@ body.dark-mode .sun-icon { display: none; }
         transform: rotate(180deg);
     }
 
-    /* FULL-SCREEN WRAPPER */
+    /* Full-screen wrapper */
     .chatbot-wrapper {
         width: 100%;
         height: 100vh;
@@ -566,7 +599,7 @@ body.dark-mode .sun-icon { display: none; }
         box-shadow: none;
     }
     
-    /* HEADER EN INPUT NETTER MAKEN */
+    /* Header en Input netter maken */
     .main-chat-area .chat-header p {
         font-size: 1em;
         line-height: 1.4;
@@ -576,7 +609,7 @@ body.dark-mode .sun-icon { display: none; }
         margin-top: 15px;
     }
     
-    /* OVERLAY (ALLEEN OP MOBIEL/TABLET) */
+    /* Overlay (alleen op mobiel/tablet) */
     .history-overlay {
         display: none; 
         position: fixed;
