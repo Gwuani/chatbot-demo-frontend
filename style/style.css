@@ -1,6 +1,7 @@
 /* ======================================= */
-/* 1. KLEURVARIABELEN (VOOR DARK MODE) */
+/* CSS VARIABLES VOOR DARK MODE THEMA */
 /* ======================================= */
+/* Kleur variabelen voor licht/donker thema. Pas deze aan voor je eigen design. */
 :root {
     /* Licht Thema (Standaard) */
     --body-bg: #f0f2f5;
@@ -39,8 +40,9 @@ body.dark-mode {
 }
 
 /* ======================================= */
-/* 2. Basisstijlen */
+/* BASISSTIJLEN */
 /* ======================================= */
+/* Algemene pagina opmaak en layout */
 body {
     margin: 0;
     padding: 0;
@@ -68,8 +70,9 @@ body {
 }
 
 /* ======================================= */
-/* 3. Linker kolom: History Sidebar */
+/* LINKER KOLOM: HISTORY SIDEBAR */
 /* ======================================= */
+/* Sidebar met chat geschiedenis, nieuwe chat knop en instellingen */
 
 /* STANDAARD STAAT (Desktop = ingeklapt) */
 .history-sidebar {
@@ -192,8 +195,9 @@ body {
 }
 
 /* ======================================= */
-/* 4. Midden kolom: Hoofdchatgebied */
+/* MIDDEN KOLOM: HOOFCHATGEBIED */
 /* ======================================= */
+/* Hoofd chat gebied waar berichten worden weergegeven */
 .main-chat-area {
     flex: 3;
     display: flex;
@@ -376,8 +380,9 @@ body.history-open .history-toggle-btn svg {
 }
 
 /* ======================================= */
-/* 5. Rechter kolom: Zijbalk */
+/* RECHTER KOLOM: ZIJBALK */
 /* ======================================= */
+/* Avatar en chatbot informatie - verborgen op mobiel */
 .sidebar {
     flex: 1;
     background-color: var(--sidebar-right-bg);
@@ -424,8 +429,9 @@ body.history-open .history-toggle-btn svg {
 }
 
 /* ======================================= */
-/* 6. Dark Mode Logo-knop Stijlen */
+/* DARK MODE TOGGLE KNOP */
 /* ======================================= */
+/* Donker/licht thema schakelaar - altijd zichtbaar onderaan sidebar */
 
 /* Dit is de 'doos' om de knop heen */
 .theme-toggle-container {
@@ -495,8 +501,9 @@ body.dark-mode .sun-icon { display: none; }
 
 
 /* ======================================= */
-/* 7. Responsive Design */
+/* RESPONSIVE DESIGN */
 /* ======================================= */
+/* Mobiele en tablet aanpassingen - sidebar wordt overlay */
 @media (max-width: 1024px) {
 
     /* Verberg rechter sidebar */

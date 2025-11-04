@@ -1,62 +1,48 @@
 // =======================================
 // CHATBOT FRONTEND SCRIPT
 // =======================================
-// Dit script beheert de UI interacties voor de chatbot interface.
-// Het regelt de sidebar toggle, overlay en dark mode functionaliteit.
+// Dit script regelt alle frontend interacties.
+//
+// Sidebar toggle: Opent/sluit de linker sidebar met chat geschiedenis
+// Dark mode toggle: Schakelt tussen licht/donker thema
+// Event listeners: Voor alle knoppen en interacties
 
-// Wacht tot de pagina volledig geladen is
 document.addEventListener("DOMContentLoaded", () => {
 
-    // =======================================
-    // SIDEBAR TOGGLE FUNCTIONALITEIT
-    // =======================================
-    // Beheert het openen/sluiten van de chat geschiedenis sidebar
-
-    // Haal alle toggle knoppen op (desktop en mobiele versies)
+    // Sidebar toggle functionaliteit
     const toggleButtons = document.querySelectorAll(".history-toggle-btn");
     const historySidebar = document.getElementById("history-sidebar");
     const overlay = document.getElementById("history-overlay");
 
-    // Functie om sidebar open/dicht te schakelen
     const toggleMenu = () => {
         historySidebar.classList.toggle("is-open");
         document.body.classList.toggle("history-open");
     };
 
-    // Voeg klik event listeners toe aan alle toggle knoppen
     if (toggleButtons.length > 0 && historySidebar) {
-        toggleButtons.forEach(button => {
-            button.addEventListener("click", toggleMenu);
-        });
+        toggleButtons.forEach(button => button.addEventListener("click", toggleMenu));
     }
 
-    // Voeg klik event listener toe aan overlay (sluit sidebar bij klik)
     if (overlay) {
         overlay.addEventListener("click", toggleMenu);
     }
 
-    // =======================================
-    // DARK MODE TOGGLE FUNCTIONALITEIT
-    // =======================================
-    // Beheert het schakelen tussen licht en donker thema
-
+    // Dark mode toggle functionaliteit
     const darkModeToggleLogo = document.getElementById("dark-mode-toggle-logo");
 
     if (darkModeToggleLogo) {
         darkModeToggleLogo.addEventListener("click", () => {
-            // Toggle de 'dark-mode' class op het body element
-            // CSS variabelen zullen automatisch het thema bijwerken
             document.body.classList.toggle("dark-mode");
         });
     }
 
     // =======================================
-    // BACKEND INTEGRATIE NOTITIES
+    // BACKEND INTEGRATIE - HIER TOEVOEGEN
     // =======================================
-    // Voor backend ontwikkelaars:
-    // - Chat berichten kunnen toegevoegd worden aan .chat-messages container
-    // - Gebruik .bot-message en .user-message classes voor styling
-    // - Chat geschiedenis items kunnen dynamisch toegevoegd worden aan .chat-history-list
-    // - Dark mode status kan opgeslagen worden in localStorage indien nodig
+    // Gebruik deze elementen voor je backend connectie:
+    // const sendBtn = document.getElementById('send-btn');
+    // const chatInput = document.getElementById('chat-input');
+    // const messagesContainer = document.querySelector('.chat-messages');
+    // const historyList = document.querySelector('.chat-history-list');
 
 });
