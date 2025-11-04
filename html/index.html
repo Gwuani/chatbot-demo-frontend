@@ -75,7 +75,7 @@
                     <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <span>Modus</span>
+                    <span>Donkere Modus</span>
                 </button>
             </div>
         </div>
@@ -102,14 +102,18 @@
 
             <!-- Chat berichten container - BACKEND: Voeg chat berichten hier toe -->
             <div class="chat-messages">
-                <!-- Voorbeeld bericht structuur:
-                <div class="message bot-message">
-                    <p>Hallo! Hoe kan ik je vandaag helpen?</p>
+                
+                <div class="message bot-message" id="initial-bot-message">
+                    <p>Hoi! Ik ben Stijn. Waar kan ik je vandaag mee helpen?</p>
                 </div>
-                <div class="message user-message">
-                    <p>Ik heb hulp nodig met mijn printer.</p>
+
+                <div class="quick-replies">
+                        <button class="quick-reply-btn" data-value="Mijn rooster inzien">Mijn rooster inzien</button>
+                        <button class="quick-reply-btn" data-value="Vakantie aanvragen">Vakantie aanvragen</button>
+                        <button class="quick-reply-btn" data-value="Hoe meld ik me ziek?">Ziek melden</button>
+                        <button class="quick-reply-btn" data-value="Declaratie indienen">Declaratie indienen</button>
                 </div>
-                -->
+                
             </div>
 
             <!-- Input area -->
