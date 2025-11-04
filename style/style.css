@@ -1,7 +1,4 @@
-/* ======================================= */
-/* CSS VARIABLES VOOR DARK MODE THEMA */
-/* ======================================= */
-/* Kleur variabelen voor licht/donker thema. Pas deze aan voor je eigen design. */
+/* CSS Variables voor dark mode thema */
 :root {
     /* Licht Thema (Standaard) */
     --body-bg: #f0f2f5;
@@ -39,18 +36,19 @@ body.dark-mode {
     --svg-fill: #1e1e1e;
 }
 
-/* ======================================= */
-/* BASISSTIJLEN */
-/* ======================================= */
-/* Algemene pagina opmaak en layout */
-body {
+/* Basisstijlen - Algemene pagina layout */
+html, body {
     margin: 0;
     padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
     background-color: var(--body-bg);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
     transition: background-color 0.3s ease;
@@ -69,10 +67,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* ======================================= */
-/* LINKER KOLOM: HISTORY SIDEBAR */
-/* ======================================= */
-/* Sidebar met chat geschiedenis, nieuwe chat knop en instellingen */
+/* Linker kolom: History sidebar */
 
 /* STANDAARD STAAT (Desktop = ingeklapt) */
 .history-sidebar {
@@ -196,10 +191,7 @@ body {
     background-color: var(--history-link-hover-bg);
 }
 
-/* ======================================= */
-/* MIDDEN KOLOM: HOOFCHATGEBIED */
-/* ======================================= */
-/* Hoofd chat gebied waar berichten worden weergegeven */
+/* Midden kolom: Hoofdchatgebied */
 .main-chat-area {
     flex: 3;
     display: flex;
@@ -383,10 +375,7 @@ body.history-open .history-toggle-btn svg {
     fill: var(--svg-fill);
 }
 
-/* ======================================= */
-/* RECHTER KOLOM: ZIJBALK */
-/* ======================================= */
-/* Avatar en chatbot informatie - verborgen op mobiel */
+/* Rechter kolom: Zijbalk */
 .sidebar {
     flex: 1;
     background-color: var(--sidebar-right-bg);
@@ -432,10 +421,7 @@ body.history-open .history-toggle-btn svg {
     filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1)); 
 }
 
-/* ======================================= */
-/* DARK MODE TOGGLE KNOP */
-/* ======================================= */
-/* Donker/licht thema schakelaar - altijd zichtbaar onderaan sidebar */
+/* Dark mode toggle knop */
 
 /* Dit is de 'doos' om de knop heen */
 .theme-toggle-container {
@@ -504,10 +490,7 @@ body.dark-mode .sun-icon { display: none; }
 }
 
 
-/* ======================================= */
-/* RESPONSIVE DESIGN */
-/* ======================================= */
-/* Mobiele en tablet aanpassingen - sidebar wordt overlay */
+/* Responsive design */
 @media (max-width: 1024px) {
 
     /* Verberg rechter sidebar */
@@ -608,6 +591,12 @@ body.dark-mode .sun-icon { display: none; }
         max-height: 100vh;
         border-radius: 0;
         box-shadow: none;
+    }
+
+    /* Voorkom ook scrollen op mobiel */
+    html, body {
+        height: 100vh;
+        overflow: hidden;
     }
     
     /* Header en Input netter maken */
