@@ -52,13 +52,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 historySidebar.classList.remove("is-open");
                 document.body.classList.remove("history-open");
             }
+
+            // Re-attach event listeners to the new quick reply buttons
+            attachQuickReplyListeners();
         });
     }
 
     const chatInput = document.getElementById("chat-input");
     const sendBtn = document.getElementById("send-btn");
     const chatMessages = document.querySelector(".chat-messages");
-    const quickReplyButtons = document.querySelectorAll(".quick-reply-btn");
 
     const appendMessage = (text, type) => {
         const messageDiv = document.createElement("div");
@@ -86,6 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     };
 
+    const attachQuickReplyListeners = () => {
+        const quickReplyButtons = document.querySelectorAll(".quick-reply-btn");
+        quickReplyButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const message = button.getAttribute("data-value");
+                handleSendMessage(message);
+            });
+        });
+    };
+
     if (sendBtn) {
         sendBtn.addEventListener("click", () => handleSendMessage(chatInput.value));
     }
@@ -98,10 +110,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    quickReplyButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const message = button.getAttribute("data-value");
-            handleSendMessage(message);
-        });
-    });
+    attachQuickReplyListeners();
 });
