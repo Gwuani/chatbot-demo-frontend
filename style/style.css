@@ -206,6 +206,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
 }
 .chat-header p {
     margin: 0;
@@ -213,6 +214,25 @@ body {
 .ai-agent-highlight {
     font-weight: 600;
     color: var(--highlight-color);
+}
+
+.mobile-avatar {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+.mobile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.mobile-title {
+    display: none;
 }
 
 /* --- De Twee Knoppen --- */
@@ -401,9 +421,9 @@ body.history-open .history-toggle-btn svg {
 .ai-label {
     background-color: var(--highlight-color);
     color: white;
-    font-size: 0.7em;
+    font-size: 0.8em;
     padding: 4px 8px;
-    border-radius: 10px;
+    border-radius: 100%;
     vertical-align: middle;
     margin-left: 5px;
     font-weight: 400;
@@ -502,6 +522,36 @@ body.dark-mode .sun-icon { display: none; }
         padding: 20px 15px;
     }
 
+    /* Show mobile avatar */
+    .mobile-avatar {
+        display: block;
+    }
+
+    /* Adjust header for mobile layout */
+    .chat-header {
+        height: 55px;
+    }
+
+    /* Show mobile title */
+    .mobile-title {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 700;
+        font-size: 1.2em;
+        color: var(--text-color);
+    }
+
+    /* Position mobile toggle button */
+    #mobile-toggle-btn {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
     /* Wissel de knoppen */
     #desktop-toggle-btn {
         display: none;
@@ -556,14 +606,24 @@ body.dark-mode .sun-icon { display: none; }
     }
 
     /* ZORG DAT DARK MODE KNOP ALTIJD ZICHTBAAR IS ZONDER SCROLLEN */
+    .history-sidebar.is-open .new-chat-btn {
+        order: 1;
+    }
+    .history-sidebar.is-open .history-header {
+        order: 2;
+    }
+    .history-sidebar.is-open .chat-history-list {
+        order: 3;
+        margin-bottom: 0;
+    }
     .history-sidebar.is-open .theme-toggle-container {
-        margin-top: 0 !important;
-        order: 999; /* Plaats onderaan */
-        position: sticky;
-        bottom: 0;
-        background-color: var(--sidebar-left-bg);
-        padding: 10px 0;
-        border-top: 1px solid var(--border-color);
+        order: 4;
+        position: sticky !important;
+        bottom: 20px !important;
+        background-color: var(--sidebar-left-bg) !important;
+        padding: 10px 0 !important;
+        border-top: 1px solid var(--border-color) !important;
+        margin-top: auto !important;
     }
 
     .history-sidebar.is-open .chat-history-list {
