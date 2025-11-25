@@ -556,14 +556,24 @@ body.dark-mode .sun-icon { display: none; }
     }
 
     /* ZORG DAT DARK MODE KNOP ALTIJD ZICHTBAAR IS ZONDER SCROLLEN */
+    .history-sidebar.is-open .new-chat-btn {
+        order: 1;
+    }
+    .history-sidebar.is-open .history-header {
+        order: 2;
+    }
+    .history-sidebar.is-open .chat-history-list {
+        order: 3;
+        margin-bottom: 0;
+    }
     .history-sidebar.is-open .theme-toggle-container {
-        margin-top: 0 !important;
-        order: 999; /* Plaats onderaan */
-        position: sticky;
-        bottom: 0;
-        background-color: var(--sidebar-left-bg);
-        padding: 10px 0;
-        border-top: 1px solid var(--border-color);
+        order: 4;
+        position: sticky !important;
+        bottom: 20px !important;
+        background-color: var(--sidebar-left-bg) !important;
+        padding: 10px 0 !important;
+        border-top: 1px solid var(--border-color) !important;
+        margin-top: auto !important;
     }
 
     .history-sidebar.is-open .chat-history-list {
