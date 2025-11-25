@@ -206,6 +206,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
 }
 .chat-header p {
     margin: 0;
@@ -213,6 +214,25 @@ body {
 .ai-agent-highlight {
     font-weight: 600;
     color: var(--highlight-color);
+}
+
+.mobile-avatar {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+.mobile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.mobile-title {
+    display: none;
 }
 
 /* --- De Twee Knoppen --- */
@@ -500,6 +520,36 @@ body.dark-mode .sun-icon { display: none; }
     .main-chat-area {
         flex: 1;
         padding: 20px 15px;
+    }
+
+    /* Show mobile avatar */
+    .mobile-avatar {
+        display: block;
+    }
+
+    /* Adjust header for mobile layout */
+    .chat-header {
+        height: 55px;
+    }
+
+    /* Show mobile title */
+    .mobile-title {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 700;
+        font-size: 1.2em;
+        color: var(--text-color);
+    }
+
+    /* Position mobile toggle button */
+    #mobile-toggle-btn {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     /* Wissel de knoppen */
